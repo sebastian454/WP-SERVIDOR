@@ -47,18 +47,9 @@ services:
     networks:
       - app-network
 
-  certbot:
-    depends_on:
-      - webserver
-    image: certbot/certbot
-    container_name: wp-certbot
-    volumes:
-      - certbot-etc:/etc/letsencrypt
-      - wordpress:/var/www/html
-    command: certonly --webroot --webroot-path=/var/www/html --email s.agudelo@rutanmedellin.org --agree-tos --no-eff-email --staging -d sxpro.ml -d www.sxpro.ml
 
 volumes:
-  certbot-etc:
+
   wordpress:
   dbdata:
 
