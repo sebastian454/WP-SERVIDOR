@@ -56,7 +56,7 @@ services:
     volumes:
       - certbot-etc:/etc/letsencrypt
       - wordpress:/var/www/html
-    command: certonly --webroot --webroot-path=/var/www/html --email s.agudelo@rutanmedellin.org --agree-tos --no-eff-email --force-renewal -d example.com -d www.example.com
+    command: certonly --webroot --webroot-path=/var/www/html --email s.agudelo@rutanmedellin.org --agree-tos --no-eff-email --force-renewal -d sxpro.ml -d www.sxpro.ml
 
 
 
