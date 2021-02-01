@@ -27,7 +27,7 @@ services:
       - WORDPRESS_DB_PASSWORD=$MYSQL_PASSWORD
       - WORDPRESS_DB_NAME=wordpress
     volumes:
-      - ./wp-content:/var/www/html/wp-content
+      - wordpress:/var/www/html
     networks:
       - app-network
 
@@ -39,7 +39,6 @@ services:
     restart: unless-stopped
     ports:
       - "80:80"
-      - "443:443"
     volumes:
       - wordpress:/var/www/html
       - ./nginx-conf:/etc/nginx/conf.d
@@ -47,21 +46,18 @@ services:
     networks:
       - app-network
 
-
   certbot:
     depends_on:
       - webserver
     image: certbot/certbot
-    container_name: certbot
+    container_name: wp-certbot
     volumes:
       - certbot-etc:/etc/letsencrypt
       - wordpress:/var/www/html
-    command: certonly --webroot --webroot-path=/var/www/html --email s.agudelo@rutanmedellin.org --agree-tos --no-eff-email --force-renewal -d sxpro.ml -d www.sxpro.ml
-
-
+    command: certonly --webroot --webroot-path=/var/www/html --email s.agudelo@rutanmedellin.org --agree-tos --no-eff-email --staging -d sxpro.ml -d www.sxpro.ml
 
 volumes:
- certbot-etc:
+  certbot-etc:
   wordpress:
   dbdata:
 
